@@ -20,7 +20,7 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.MemberSubscriptionPlansList) {
+@foreach (var item in Model.MemberSubscriptionPlansList!) {
         <tr>
             <td>@item.Details.Name</td>
             <td>$@item.Details.PricePerBillingPeriod</td>

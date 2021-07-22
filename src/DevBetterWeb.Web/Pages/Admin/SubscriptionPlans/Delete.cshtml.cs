@@ -23,7 +23,7 @@ namespace DevBetterWeb.Web.Pages.Admin.SubscriptionPlans
         }
 
         [BindProperty]
-        public MemberSubscriptionPlan MemberSubscriptionPlan { get; set; }
+        public MemberSubscriptionPlan? MemberSubscriptionPlan { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
@@ -48,7 +48,7 @@ namespace DevBetterWeb.Web.Pages.Admin.SubscriptionPlans
                 return NotFound();
             }
 
-            MemberSubscriptionPlan = await _context.MemberSubscriptionPlan.FindAsync(id);
+            MemberSubscriptionPlan = await _context.MemberSubscriptionPlan!.FindAsync(id);
 
             if (MemberSubscriptionPlan != null)
             {

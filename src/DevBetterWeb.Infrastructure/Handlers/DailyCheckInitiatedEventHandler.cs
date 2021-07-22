@@ -15,16 +15,19 @@ namespace DevBetterWeb.Core.Handlers
     private readonly AdminUpdatesWebhook _webhook;
     private readonly IAlumniGraduationService _alumniGraduationService;
     private readonly IDailyCheckPingService _dailyCheckPingService;
+    private readonly IDailyCheckSubscriptionPlanCountService _dailyCheckSubscriptionPlanCountService;
     private readonly IRepository<DailyCheck> _repository;
 
     public DailyCheckInitiatedEventHandler(AdminUpdatesWebhook webhook,
       IAlumniGraduationService alumniGraduationService,
       IDailyCheckPingService dailyCheckPingService,
+      IDailyCheckSubscriptionPlanCountService dailyCheckSubscriptionPlanCountService,
       IRepository<DailyCheck> repository)
     {
       _webhook = webhook;
       _alumniGraduationService = alumniGraduationService;
       _dailyCheckPingService = dailyCheckPingService;
+      _dailyCheckSubscriptionPlanCountService = dailyCheckSubscriptionPlanCountService;
       _repository = repository;
     }
 
@@ -42,6 +45,9 @@ namespace DevBetterWeb.Core.Handlers
 
       // check if people need to be pinged about new member link
       await _dailyCheckPingService.SendPingIfNeeded(messages);
+
+      // check if number of MemberSubscriptionPlans == expected number
+      await _dailyCheckSubscriptionPlanCountService.WarnIfNumberOfMemberSubscriptionPlansDifferentThanExpected(messages);
 
       messages.Append(DAILY_CHECK_COMPLETED_MESSAGE);
 

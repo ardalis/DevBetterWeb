@@ -1,5 +1,7 @@
 ﻿using DevBetterWeb.Core.Interfaces;
 using Stripe;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DevBetterWeb.Infrastructure.PaymentHandler.StripePaymentHandler
 {
@@ -19,6 +21,13 @@ namespace DevBetterWeb.Infrastructure.PaymentHandler.StripePaymentHandler
       int price = (int)priceObject.UnitAmount!;
 
       return price;
+    }
+
+    public async Task<int> GetPriceCount()
+    {
+      var prices = await _priceService.ListAsync();
+
+      return prices.Count();
     }
   }
 

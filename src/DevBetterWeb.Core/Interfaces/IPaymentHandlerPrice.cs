@@ -1,7 +1,10 @@
-﻿namespace DevBetterWeb.Core.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace DevBetterWeb.Core.Interfaces
 {
   public interface IPaymentHandlerPrice
   {
     int GetPriceAmount(string subscriptionPriceId);
+    Task<int> GetPriceCount();
   }
 }

@@ -16,6 +16,7 @@ namespace DevBetterWeb.Infrastructure.Services
     private TimeSpan TWO_DAYS = new TimeSpan(2, 0, 0, 0);
     private TimeSpan FOUR_DAYS = new TimeSpan(4, 0, 0, 0);
     private int DAYS_IN_TWO_YEARS = 365 * 2;
+    private int DAYS_BEFORE_GRADUATION_TO_PING = 10;
 
     public IRepository<Invitation> _inviteRepository;
     public IRepository<Member> _memberRepository;
@@ -73,11 +74,9 @@ namespace DevBetterWeb.Infrastructure.Services
       var members = await _memberRepository.ListAsync();
       var membersToPingAdminsAbout = new List<Member>();
 
-      var daysBeforeGraduationToPing = 10;
-
       foreach (var member in members)
       {
-        if (member.TotalSubscribedDays() == DAYS_IN_TWO_YEARS - daysBeforeGraduationToPing)
+        if (member.TotalSubscribedDays() == DAYS_IN_TWO_YEARS - DAYS_BEFORE_GRADUATION_TO_PING)
         {
           membersToPingAdminsAbout.Add(member);
         }
@@ -99,7 +98,7 @@ namespace DevBetterWeb.Infrastructure.Services
 
         foreach(var user in usersInAdminRole)
         {
-          await _emailService.SendEmailAsync(user.Email, "Upcoming DevBetter Graduation", $"Ensure that the following member(s)'s subscriptions are not renewed, as they will graduate to alumni status in {daysBeforeGraduationToPing} days:\n {listOfMembersToPingAdminsAbout}");
+          await _emailService.SendEmailAsync(user.Email, "Upcoming DevBetter Graduation", $"Ensure that the following member(s)'s subscriptions are not renewed, as they will graduate to alumni status in {DAYS_BEFORE_GRADUATION_TO_PING} days:\n {listOfMembersToPingAdminsAbout}");
         }
 
         messages.Append($"Admins have been reminded not to renew the subscriptions of the following members about to graduate: {listOfMembersToPingAdminsAbout}");
