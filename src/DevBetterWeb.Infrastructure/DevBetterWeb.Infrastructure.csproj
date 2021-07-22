@@ -29,7 +29,7 @@
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
     <PackageReference Include="Autofac" Version="6.2.0" />
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
-    <PackageReference Include="Stripe.net" Version="39.60.0" />
+    <PackageReference Include="Stripe.net" Version="39.61.0" />
     <PackageReference Include="VimeoDotNet" Version="2.1.1" />
   </ItemGroup>
 

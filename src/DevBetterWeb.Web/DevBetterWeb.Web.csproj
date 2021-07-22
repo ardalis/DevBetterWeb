@@ -53,7 +53,7 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Sendgrid" Version="9.24.1" />
 		<PackageReference Include="SixLabors.ImageSharp" Version="1.0.3" />
-		<PackageReference Include="Stripe.net" Version="39.60.0" />
+		<PackageReference Include="Stripe.net" Version="39.61.0" />
 		<PackageReference Include="System.ComponentModel.Annotations" Version="5.0.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.4" />
 		<PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.1.4" />
